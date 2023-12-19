@@ -36,7 +36,7 @@ public class Order {
     private Boolean sign;//订单是否成功创建
 
 
-    public Order(){
+    public Order() {
         Snowflake snowflake = IdUtil.createSnowflake(1, 1);
         this.setId(snowflake.nextId());
 

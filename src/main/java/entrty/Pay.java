@@ -23,20 +23,20 @@ public class Pay {
 
     private int balanceEnd;//账号支付后的余额
 
-    public Pay(){
+    public Pay() {
         Snowflake snowflake = IdUtil.createSnowflake(1, 1);
         this.setId(snowflake.nextId());
         Random rand = new Random();
         int randNumber = rand.nextInt(4);
-        if(randNumber==0){
+        if (randNumber == 0) {
             this.setPayWay("支付宝");
-        }else if (randNumber==2){
+        } else if (randNumber == 2) {
             this.setPayWay("微信");
-        }else if (randNumber==3){
+        } else if (randNumber == 3) {
             this.setPayWay("银行卡");
-        }else if (randNumber==4){
+        } else if (randNumber == 4) {
             this.setPayWay("信用卡");
-        }else {
+        } else {
             this.setPayWay("花呗");
         }
         this.setBalance(rand.nextInt(10001));

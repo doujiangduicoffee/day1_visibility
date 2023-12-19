@@ -11,7 +11,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Visibility {
 
     private User user = new User();
-    private Order order = new Order();;
+    private Order order = new Order();
+    ;
     private Pay pay = new Pay();
 
     public static void main(String[] args) throws InterruptedException {
@@ -44,7 +45,7 @@ public class Visibility {
         System.out.println(pay.toString());
     }
 
-    class orderSys implements Runnable{
+    class orderSys implements Runnable {
 
 //    private User user;
 
@@ -52,6 +53,7 @@ public class Visibility {
 //        this.user = user;
 //    }
         Lock lock = new ReentrantLock();
+
         @SneakyThrows
         @Override
         public void run() {
@@ -63,9 +65,9 @@ public class Visibility {
             lock.unlock();
             int balance = pay.getBalance();
             lock.lock();
-            if (balance > order.getMoney()){//账户余额大于订单金额
+            if (balance > order.getMoney()) {//账户余额大于订单金额
                 order.setSign(true);
-            }else {
+            } else {
                 order.setSign(false);
             }
             order.setEndTime(new Date());
@@ -74,7 +76,7 @@ public class Visibility {
     }
 
 
-    class paySys implements Runnable{
+    class paySys implements Runnable {
         Lock lock = new ReentrantLock();
 
 //    private User user;
@@ -90,12 +92,12 @@ public class Visibility {
             pay.setUserId(user.getId());
             pay.setOrderId(order.getId());
             lock.unlock();
-            if(Objects.isNull(order.getSign())) {
+            if (Objects.isNull(order.getSign())) {
                 Thread.sleep(100);
             }
-            if(order.getSign()) {
+            if (order.getSign()) {
                 pay.setBalanceEnd(pay.getBalance() - order.getMoney());
-            }else {
+            } else {
                 pay.setBalanceEnd(pay.getBalance());
             }
         }
